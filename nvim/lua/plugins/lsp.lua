@@ -7,11 +7,11 @@ return { -- LSP Configuration & Plugins
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
 
 		-- Useful status updates for LSP.
-		{ "j-hui/fidget.nvim",       opts = {} },
+		{ "j-hui/fidget.nvim", opts = {} },
 
 		-- `neodev` configures Lua LSP for your Neovim config, runtime and plugins
 		-- used for completion, annotations and signatures of Neovim apis
-		{ "folke/neodev.nvim",       opts = {} },
+		{ "folke/neodev.nvim", opts = {} },
 	},
 	config = function()
 		vim.api.nvim_create_autocmd("LspAttach", {
@@ -133,9 +133,7 @@ return { -- LSP Configuration & Plugins
 			--
 			-- Some languages (like typescript) have entire language plugins that can be useful:
 			--    https://github.com/pmizio/typescript-tools.nvim
-			--
-			-- But for many setups, the LSP (`tsserver`) will work just fine
-			tsserver = {},
+			ts_ls = {},
 			--
 
 			lua_ls = {
