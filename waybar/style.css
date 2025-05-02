@@ -51,6 +51,7 @@ tooltip label {
   background: rgba(000, 000, 000, 0.8);
 }
 #network,
+#privacy,
 #idle_inhibitor {
   padding: 0 8px;
 }
