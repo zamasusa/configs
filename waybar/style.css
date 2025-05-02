@@ -1,0 +1,96 @@
+@define-color active #ffffff;
+@define-color inactive #555555;
+
+* {
+  border: none;
+  font-size: 15px;
+  font-family: Helvetica, Roboto, Arial, sans-serif;
+  /* color: White; */
+}
+
+window#waybar {
+  color: @active;
+  background: transparent;
+}
+
+tooltip {
+  border-radius: 15px;
+  background: rgba(0, 0, 0, 0.9);
+  color: @active;
+}
+
+tooltip label {
+  color: @active;
+}
+
+#custom-logo {
+  padding: 0 10px;
+}
+
+.modules-right {
+  /* border: 1px solid lighter(@active); */
+  /* border: 1px solid @active; */
+  border-radius: 0 0 0 15px;
+  padding: 0 10px;
+  background: rgba(000, 000, 000, 0.8);
+}
+
+.modules-center {
+  /* border: 1px solid lighter(@active); */
+  /* border: 1px solid @active; */
+  padding: 0 15px;
+  border-radius: 0 0 15px 15px;
+  background: rgba(000, 000, 000, 0.8);
+}
+
+.modules-left {
+  /* border: 1px solid lighter(@active); */
+  /* border: 1px solid @active; */
+  padding: 0px 10px;
+  border-radius: 0 0 15px 0;
+  background: rgba(000, 000, 000, 0.8);
+}
+#network,
+#idle_inhibitor {
+  padding: 0 8px;
+}
+
+#bluetooth {
+  padding: 0 6px 0 10px;
+}
+
+#tray,
+#disk,
+#memory,
+#cpu,
+#temperature,
+#jack,
+#window,
+#clock {
+  padding: 0 5px;
+}
+#custom-logo {
+  color: #1793d1;
+}
+
+#workspaces button {
+  color: @inactive;
+  border-radius: 0px;
+}
+
+#workspaces button.active {
+  color: @active;
+}
+
+#network.module.speed {
+  border-left: 1px solid;
+  border-right: 1px solid;
+  margin: 0 0 0 10px;
+}
+
+@keyframes blink {
+  to {
+    background-color: #ffffff;
+    color: #000000;
+  }
+}

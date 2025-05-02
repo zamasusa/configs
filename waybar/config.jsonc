@@ -1,0 +1,135 @@
+{
+  "layer": "top",
+  "position": "top",
+  "modules-left": [
+    "custom/logo",
+    "clock",
+    "disk",
+    "memory",
+    "cpu",
+    "temperature",
+    "hyprland/window",
+  ],
+  "modules-center": ["hyprland/workspaces"],
+  "modules-right": [
+    "tray",
+    "idle_inhibitor",
+    "bluetooth",
+    "group/audio",
+    "group/networking",
+  ],
+  "reload_style_on_change": true,
+  "custom/logo": {
+    "format": "󰣇",
+    "tooltip": false,
+  },
+  "clock": {
+    "format": "{:%I:%M:%S %p}",
+    "interval": 1,
+    "tooltip-format": "\n<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+    "calendar-weeks-pos": "right",
+    "today-format": "<span color='#7645AD'><b><u>{}</u></b></span>",
+    "format-calendar": "<span color='#aeaeae'><b>{}</b></span>",
+    "format-calendar-weeks": "<span color='#aeaeae'><b>W{:%V}</b></span>",
+    "format-calendar-weekdays": "<span color='#aeaeae'><b>{}</b></span>",
+  },
+  "disk": {
+    "interval": 30,
+    "format": "  {percentage_used}%",
+    "path": "/",
+  },
+  "memory": {
+    "format": " {percentage}%",
+  },
+  "cpu": {
+    "interval": 1,
+    "format": "  {usage}%",
+  },
+  "temperature": {
+    "format": " {temperatureC}°C",
+    "format-critical": " {temperatureC}°C",
+    "interval": 1,
+    "critical-threshold": 80,
+  },
+  "hyprland/workspaces": {
+    "format": "<span font='18px'>{icon}</span>",
+  },
+  "hyprland/window": {
+    "format": "( {class} )",
+  },
+  "tray": {
+    "icon-size": 14,
+    "spacing": 10,
+  },
+  "idle_inhibitor": {
+    "format": "<span font='12'>{icon}</span>",
+    "format-icons": {
+      "activated": "󰾪",
+      "deactivated": "󰅶",
+    },
+  },
+  "bluetooth": {
+    "format-on": "󰂯",
+    "format-off": "",
+    "format-disabled": "󰂲",
+    "format-connected": "󰂴",
+    "format-connected-battery": "{device_battery_percentage}% 󰂴",
+    "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
+    "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
+    "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+    "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%",
+    "on-click": "rofi-bluetooth",
+  },
+  "network": {
+    "format-wifi": " ",
+    "format-ethernet": "󰈀",
+    "format-disconnected": "󱐅",
+    "tooltip-format": "{ipaddr}",
+    "tooltip-format-wifi": "{essid} ({signalStrength}%)  | {ipaddr}",
+    "tooltip-format-ethernet": "{ifname} 🖧 | {ipaddr}",
+    "tooltip-format-ethernet": "{bandwidthTotalBytes}",
+    "on-click": "networkmanager_dmenu",
+  },
+  "network#speed": {
+    "format": "󱦳 {bandwidthDownBytes}   󱦲 {bandwidthUpBytes}",
+    "interval": 1,
+    "tooltip-format": "{ipaddr}",
+    "tooltip-format-wifi": "{essid} ({signalStrength}%)   \n{ipaddr} | {frequency} MHz{icon} ",
+    "tooltip-format-ethernet": "{ifname} 󰈀 \n{ipaddr} | {frequency} MHz{icon} ",
+    "tooltip-format-disconnected": "Not Connected to any type of Network",
+    "tooltip": true,
+  },
+  "group/networking": {
+    "orientation": "horizontal",
+    "drawer": {
+      "transition-duration": 500,
+      "transition-left-to-right": false,
+    },
+    "modules": ["network", "network#speed"],
+  },
+  "mpd": {
+    "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) <U+F001>",
+    "format-disconnected": "Disconnected <U+F001>",
+    "format-stopped": "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}Stopped <U+F001>",
+    "interval": 2,
+    "consume-icons": {
+      "on": "<U+F0C4> ",
+    },
+    "random-icons": {
+      "off": "<span color=\"#f53c3c\"><U+F074></span> ",
+      "on": "<U+F074> ",
+    },
+    "repeat-icons": {
+      "on": "<U+F01E> ",
+    },
+    "single-icons": {
+      "on": "<U+F01E>1 ",
+    },
+    "state-icons": {
+      "paused": "<U+F04C>",
+      "playing": "<U+F04B>",
+    },
+    "tooltip-format": "MPD (connected)",
+    "tooltip-format-disconnected": "MPD (disconnected)",
+  },
+}
