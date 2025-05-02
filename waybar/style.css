@@ -74,6 +74,17 @@ tooltip label {
   color: #1793d1;
 }
 
+#custom-gpu-temp {
+  border-left: 1px solid;
+  border-right: 1px solid;
+  padding: 0 5px;
+}
+
+#cpu {
+  border-left: 1px solid;
+  padding: 0 0 0 5px;
+}
+
 #tray {
   border-right: 1px solid;
   padding: 0 15px 0 0;
