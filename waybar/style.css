@@ -73,6 +73,12 @@ tooltip label {
   color: #1793d1;
 }
 
+#tray {
+  border-right: 1px solid;
+  padding: 0 15px 0 0;
+  margin: 0 5px 0 0;
+}
+
 #workspaces button {
   color: @inactive;
   border-radius: 0px;
