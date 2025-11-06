@@ -1,165 +1,106 @@
 {
   "layer": "top",
   "position": "top",
-  "modules-left": [
-    "custom/logo",
-    "clock",
-    "disk",
-    "memory",
-    "cpu",
-    "temperature",
-    "custom/gpu-temp",
-    "hyprland/window",
-    "privacy",
-  ],
-  "modules-center": ["hyprland/workspaces"],
+  "modules-left": ["hyprland/workspaces"],
+
+  "modules-center": ["clock", "custom/weather"],
+
   "modules-right": [
+    "pulseaudio",
+    "custom/uptime",
+    "backlight",
+    "battery",
+    "network",
+    "cpu",
+    "memory",
+    "custom/docker",
     "tray",
-    "idle_inhibitor",
-    "bluetooth",
-    "group/audio",
-    "group/networking",
+    "custom/lock"
   ],
-  "reload_style_on_change": true,
-  "custom/logo": {
-    "format": "󰣇",
+
+  "hyprland/workspaces": {
+    "format": "{name}: {icon}",
+    "format-icons": {
+      "active": "",
+      "default": ""
+    }
+  },
+
+  "tray": {
+    "icon-size": 16,
+    "spacing": 10
+  },
+
+  "custom/music": {
+    "format": "  {}",
+    "escape": true,
+    "interval": 5,
     "tooltip": false,
+    "exec": "playerctl metadata --format='{{ artist }} - {{ title }}'",
+    "on-click": "playerctl play-pause",
+    "max-length": 50
   },
+
   "clock": {
-    "format": "{:%I:%M:%S %p}",
-    "interval": 1,
-    "tooltip-format": "\n<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-    "calendar-weeks-pos": "right",
-    "today-format": "<span color='#7645AD'><b><u>{}</u></b></span>",
-    "format-calendar": "<span color='#aeaeae'><b>{}</b></span>",
-    "format-calendar-weeks": "<span color='#aeaeae'><b>W{:%V}</b></span>",
-    "format-calendar-weekdays": "<span color='#aeaeae'><b>{}</b></span>",
+    "timezone": "America/Detroit",
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+    "format": "{:%d/%m/%Y - %H:%M:%S}",
+    "interval": 1
   },
-  "disk": {
-    "interval": 30,
-    "format": "  {percentage_used}%",
-    "path": "/",
+
+  "network": {
+    "format-wifi": "󰤢 {bandwidthDownBits}",
+    "format-ethernet": "󰈀 {bandwidthDownBits}",
+    "format-disconnected": "󰤠 No Network",
+    "interval": 5,
+    "tooltip": false
   },
-  "memory": {
-    "format": " {percentage}%",
-  },
+
   "cpu": {
     "interval": 1,
-    "format": "CPU {usage}%",
+    "format": "  {icon0}{icon1}{icon2}{icon3} {usage:>2}%",
+    "format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"]
   },
-  "temperature": {
-    "format": " {temperatureC}°C",
-    "format-critical": " {temperatureC}°C",
-    "interval": 1,
-    "critical-threshold": 80,
-    "thermal-zone": 1,
-    "tooltip": false,
+
+  "memory": {
+    "interval": 30,
+    "format": "  {used:0.1f}G/{total:0.1f}G"
   },
-  "custom/gpu-temp": {
-    "exec": "nvidia-smi --query-gpu=utilization.gpu,temperature.gpu --format=csv,nounits,noheader | sed 's/\\([0-9]\\+\\), \\([0-9]\\+\\)/\\1% 🌡️ \\2°C/g'",
-    "format": "GPU {}",
-    "interval": 2,
-    "tooltip": false,
+
+  "custom/uptime": {
+    "format": "{}",
+    "interval": 60,
+    "exec": "sh -c '(uptime -p)'"
   },
-  "hyprland/window": {
-    "format": "( {class} )",
-    "tooltip": false,
-  },
-  "tray": {
-    "icon-size": 14,
-    "spacing": 10,
-  },
-  "idle_inhibitor": {
-    "format": "<span font='12'>{icon}</span>",
+
+  "pulseaudio": {
+    "format": "{icon} {volume}%",
+    "format-muted": "",
     "format-icons": {
-      "activated": "󰾪",
-      "deactivated": "󰅶",
+      "default": ["", "", " "]
     },
+    "on-click": "pavucontrol"
   },
-  "bluetooth": {
-    "format-on": "󰂯",
-    "format-off": "󰂲",
-    "format-disabled": "󰂲",
-    "format-connected": "󰂴",
-    "format-connected-battery": "{device_battery_percentage}% 󰂴",
-    "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
-    "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
-    "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
-    "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%",
-    "on-click": "~/.config/waybar/scripts/bluetooth-toggle.sh",
+
+  "custom/power": {
+    "tooltip": false,
+    "on-click": "wlogout &",
+    "format": "⏻"
   },
-  "network": {
-    "format-wifi": " ",
-    "format-ethernet": "󰈀",
-    "format-disconnected": "󱐅",
-    "tooltip-format": "{ipaddr}",
-    "tooltip-format-wifi": "{essid} ({signalStrength}%)  | {ipaddr}",
-    "tooltip-format-ethernet": "{ifname} 🖧 | {ipaddr}",
-    "tooltip-format-ethernet": "{bandwidthTotalBytes}",
-    "on-click": "networkmanager_dmenu",
+
+  "custom/docker": {
+    "format": "{}",
+    "return-type": "json",
+    "interval": 10,
+    "exec": "$(pwd)/scripts/docker-stats/docker-stats",
+    "tooltip": true
   },
-  "network#speed": {
-    "format": "󱦳 {bandwidthDownBytes}   󱦲 {bandwidthUpBytes}",
-    "interval": 1,
-    "tooltip-format": "{ipaddr}",
-    "tooltip-format-wifi": "{essid} ({signalStrength}%)   \n{ipaddr} | {frequency} MHz{icon} ",
-    "tooltip-format-ethernet": "{ifname} 󰈀 \n{ipaddr} | {frequency} MHz{icon} ",
-    "tooltip-format-disconnected": "Not Connected to any type of Network",
+
+  "custom/weather": {
+    "format": "{}",
     "tooltip": true,
-  },
-  "group/networking": {
-    "orientation": "horizontal",
-    "drawer": {
-      "transition-duration": 500,
-      "transition-left-to-right": false,
-    },
-    "modules": ["network", "network#speed"],
-  },
-  "mpd": {
-    "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) <U+F001>",
-    "format-disconnected": "Disconnected <U+F001>",
-    "format-stopped": "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}Stopped <U+F001>",
-    "interval": 2,
-    "consume-icons": {
-      "on": "<U+F0C4> ",
-    },
-    "random-icons": {
-      "off": "<span color=\"#f53c3c\"><U+F074></span> ",
-      "on": "<U+F074> ",
-    },
-    "repeat-icons": {
-      "on": "<U+F01E> ",
-    },
-    "single-icons": {
-      "on": "<U+F01E>1 ",
-    },
-    "state-icons": {
-      "paused": "<U+F04C>",
-      "playing": "<U+F04B>",
-    },
-    "tooltip-format": "MPD (connected)",
-    "tooltip-format-disconnected": "MPD (disconnected)",
-  },
-  "privacy": {
-    "icon-spacing": 4,
-    "icon-size": 18,
-    "transition-duration": 250,
-    "modules": [
-      {
-        "type": "screenshare",
-        "tooltip": true,
-        "tooltip-icon-size": 24,
-      },
-      {
-        "type": "audio-out",
-        "tooltip": true,
-        "tooltip-icon-size": 24,
-      },
-      {
-        "type": "audio-in",
-        "tooltip": true,
-        "tooltip-icon-size": 24,
-      },
-    ],
-  },
+    "interval": 1800,
+    "exec": "~/.config/waybar/scripts/weather-stats/weather-stats",
+    "return-type": "json"
+  }
 }
