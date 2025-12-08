@@ -6,6 +6,7 @@
   "modules-center": ["clock", "custom/weather"],
 
   "modules-right": [
+    "custom/sunset",
     "pulseaudio",
     "custom/uptime",
     "backlight",
@@ -13,22 +14,21 @@
     "network",
     "cpu",
     "memory",
-    "custom/docker",
     "tray",
-    "custom/lock"
+    "custom/lock",
   ],
 
   "hyprland/workspaces": {
     "format": "{name}: {icon}",
     "format-icons": {
       "active": "",
-      "default": ""
-    }
+      "default": "",
+    },
   },
 
   "tray": {
     "icon-size": 16,
-    "spacing": 10
+    "spacing": 10,
   },
 
   "custom/music": {
@@ -38,14 +38,14 @@
     "tooltip": false,
     "exec": "playerctl metadata --format='{{ artist }} - {{ title }}'",
     "on-click": "playerctl play-pause",
-    "max-length": 50
+    "max-length": 50,
   },
 
   "clock": {
     "timezone": "America/Detroit",
     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
     "format": "{:%d/%m/%Y - %H:%M:%S}",
-    "interval": 1
+    "interval": 1,
   },
 
   "network": {
@@ -53,47 +53,39 @@
     "format-ethernet": "󰈀 {bandwidthDownBits}",
     "format-disconnected": "󰤠 No Network",
     "interval": 5,
-    "tooltip": false
+    "tooltip": false,
   },
 
   "cpu": {
     "interval": 1,
     "format": "  {icon0}{icon1}{icon2}{icon3} {usage:>2}%",
-    "format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"]
+    "format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"],
   },
 
   "memory": {
     "interval": 30,
-    "format": "  {used:0.1f}G/{total:0.1f}G"
+    "format": "  {used:0.1f}G/{total:0.1f}G",
   },
 
   "custom/uptime": {
     "format": "{}",
     "interval": 60,
-    "exec": "sh -c '(uptime -p)'"
+    "exec": "sh -c '(uptime -p)'",
   },
 
   "pulseaudio": {
     "format": "{icon} {volume}%",
     "format-muted": "",
     "format-icons": {
-      "default": ["", "", " "]
+      "default": ["", "", " "],
     },
-    "on-click": "pavucontrol"
+    "on-click": "pavucontrol",
   },
 
   "custom/power": {
     "tooltip": false,
     "on-click": "wlogout &",
-    "format": "⏻"
-  },
-
-  "custom/docker": {
-    "format": "{}",
-    "return-type": "json",
-    "interval": 10,
-    "exec": "$(pwd)/scripts/docker-stats/docker-stats",
-    "tooltip": true
+    "format": "⏻",
   },
 
   "custom/weather": {
@@ -101,6 +93,14 @@
     "tooltip": true,
     "interval": 1800,
     "exec": "~/.config/waybar/scripts/weather-stats/weather-stats",
-    "return-type": "json"
-  }
+    "return-type": "json",
+  },
+
+  "custom/sunset": {
+    "format": "{}",
+    "interval": 1,
+    "exec": "~/.config/waybar/scripts/hyprsunset/get-status.sh",
+    "on-click": "~/.config/waybar/scripts/hyprsunset/on-click.sh",
+    "return-type": "json",
+  },
 }

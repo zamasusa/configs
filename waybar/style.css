@@ -53,7 +53,8 @@ button {
 #custom-power,
 #custom-weather,
 #custom-uptime,
-#custom-docker {
+#custom-docker,
+#custom-sunset {
   background-color: #101010;
   padding: 0.5rem 1rem;
   margin: 5px 0;
@@ -62,6 +63,10 @@ button {
 #clock {
   color: #8caaee;
   border-radius: 5px;
+}
+
+#custom-sunset {
+  border-radius: 5px 0px 0px 5px;
 }
 
 #custom-weather {
@@ -93,7 +98,6 @@ button {
 
 #pulseaudio {
   color: #ea999c;
-  border-radius: 5px 0px 0px 5px;
 }
 
 #custom-docker {
